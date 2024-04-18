@@ -7,9 +7,15 @@ CREATE TABLE "users" (
     "cpf" TEXT NOT NULL,
     "rg" TEXT NOT NULL,
     "gender" TEXT NOT NULL,
-    "phone_number" INTEGER NOT NULL,
+    "phone_number" TEXT NOT NULL,
     "birth_date" DATETIME NOT NULL
 );
+
+-- CreateIndex
+CREATE UNIQUE INDEX "users_email_key" ON "users"("email");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "users_password_key" ON "users"("password");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "users_cpf_key" ON "users"("cpf");

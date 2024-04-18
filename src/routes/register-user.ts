@@ -17,7 +17,7 @@ export async function RegisterUser(app: FastifyInstance) {
           cpf: z.string().length(11),
           rg: z.string().min(8).max(11),
           gender: z.string().length(1),
-          phoneNumber: z.coerce.number().min(11),
+          phoneNumber: z.string().length(11),
           birthDate: z.string().transform((value) => new Date(value)), // alterar o tipo
           // doctor info
           doctorName: z.string(),
@@ -35,9 +35,9 @@ export async function RegisterUser(app: FastifyInstance) {
           cid: z.string().max(12),
         }),
         response: {
-          201: {
-            //adicionar response
-          },
+          201: z.object({
+            userId: z.string().uuid()
+          }),
         },
       },
     },
@@ -52,7 +52,7 @@ export async function RegisterUser(app: FastifyInstance) {
       };
 
       const validatedData = await webScrapper(doctorData);
-
+      // criar um tipo para validatedData e fazer o if com esse tipo, assim garantido a verificacao
       if (
         validatedData === false ||
         validatedData === undefined ||
@@ -89,9 +89,20 @@ export async function RegisterUser(app: FastifyInstance) {
       }
 
       //cadatrar o usuario no banco de dados
+      const user = await prisma.user.create({
+        data: {
+          name: data.name,
+          cpf: data.cpf,
+          rg: data.rg,
+          email: data.email,
+          gender: data.gender,
+          password: data.password,
+          birthDate: data.birthDate,
+          phoneNumber: data.phoneNumber,
+        }
+      })
 
-
-      return reply.status(201).send("dados recebidos");
+      return reply.status(201).send({ userId: user.id});
     }
   );
 }

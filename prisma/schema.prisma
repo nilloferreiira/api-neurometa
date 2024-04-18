@@ -14,11 +14,11 @@ model User {
   id          String   @id @default(uuid())
   name        String
   email       String   @unique
-  password    String
+  password    String   @unique
   cpf         String   @unique
   rg          String
   gender      String
-  phoneNumber Int      @map("phone_number")
+  phoneNumber String   @map("phone_number")
   birthDate   DateTime @map("birth_date")
 
   @@map("users")

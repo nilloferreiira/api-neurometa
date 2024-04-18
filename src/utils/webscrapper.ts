@@ -92,17 +92,17 @@ async function fillData(page: Promise<Page>, doctorData: DoctorData) {
 }
 
 export async function webScrapper(doctarData: DoctorData) {
-try {                                   // { headless: false }
-    const browser = await puppeteer.launch();
+try {                                   // 
+    const browser = await puppeteer.launch({ headless: false });
     const page = browser.newPage();
     const URL = "https://portal.cfm.org.br/busca-medicos/";
 
     // apagar esta linha
-      // (await page).setViewport({
-      //   width: 1365,
-      //   height: 965,
-      //   deviceScaleFactor: 1,
-      // });
+      (await page).setViewport({
+        width: 1365,
+        height: 965,
+        deviceScaleFactor: 1,
+      });
     //
 
     (await page).goto(URL);
@@ -123,15 +123,3 @@ try {                                   // { headless: false }
     console.log(e);
   }
 }
-
-// const robot = async () => {
-//   const doctarData: DoctorData = {
-//     name: "Veida Borges Soares de Queiroz",
-//     crm: 7286,
-//     uf: "SE",
-//   };
-
-//   await main(doctarData);
-// };
-
-// robot();
