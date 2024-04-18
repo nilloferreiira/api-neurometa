@@ -2,6 +2,7 @@ import fastify from "fastify";
 import { errorHandler } from "./error-handler";
 import { RegisterUser } from "./routes/register-user";
 import { serializerCompiler, validatorCompiler } from 'fastify-type-provider-zod';
+import { Approve } from "./routes/approve";
 
 
 const app = fastify();
@@ -11,6 +12,7 @@ app.setValidatorCompiler(validatorCompiler)
 app.setSerializerCompiler(serializerCompiler)
 
 app.register(RegisterUser)
+app.register(Approve)
 
 // app.setErrorHandler(errorHandler)
 

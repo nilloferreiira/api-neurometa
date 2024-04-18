@@ -18,22 +18,9 @@ Content-Type: application/json
   "cid": "L20.9"
 }
 
-# {
-#   "name": "Fulano da Silva",
-#   "email": "fulano@email.com",
-#   "password": "SenhaSegura123",
-#   "cpf": "12345678900",
-#   "rg": "599.559-9",
-#   "gender": "M",
-#   "phoneNumber": "12345678900",
-#   "birthDate": "1980-01-01",
-#   "doctorName": "Dra. Maria Oliveira",
-#   "uf": "RJ",
-#   "crm": "1234567",
-#   "especialidade": "Dermatologia",
-#   "diagnostico": "Dermatite Atópica",
-#   "cid": "L20.9"
-# }
+###
+
+PUT http://localhost:3333/approve/05243cb3-ff78-4547-a6c1-f851753fb3e7
 
 # const doctarData: DoctorData = {
 #   name: "Veida Borges Soares de Queiroz",
