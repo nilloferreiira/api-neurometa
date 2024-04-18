@@ -6,7 +6,7 @@ import { prisma } from '../lib/prisma';
 export async function Approve(app: FastifyInstance) {
   app
     .withTypeProvider<ZodTypeProvider>()
-    .put("/approve/:userId", 
+    .get("/approve/:userId", 
         {
             schema: {
                 params: z.object({

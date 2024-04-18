@@ -20,7 +20,7 @@ Content-Type: application/json
 
 ###
 
-PUT http://localhost:3333/approve/05243cb3-ff78-4547-a6c1-f851753fb3e7
+GET http://localhost:3333/approve/05243cb3-ff78-4547-a6c1-f851753fb3e7
 
 # const doctarData: DoctorData = {
 #   name: "Veida Borges Soares de Queiroz",
