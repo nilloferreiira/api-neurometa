@@ -1,7 +1,8 @@
 import { z } from "zod";
+import { prisma } from "../lib/prisma";
 import { FastifyInstance } from "fastify";
-import { ZodTypeProvider } from "fastify-type-provider-zod";
 import { webScrapper } from "../utils/webscrapper";
+import { ZodTypeProvider } from "fastify-type-provider-zod";
 
 export async function RegisterUser(app: FastifyInstance) {
   app.withTypeProvider<ZodTypeProvider>().post(
@@ -49,14 +50,45 @@ export async function RegisterUser(app: FastifyInstance) {
         uf: data.uf,
       };
 
-      const validatedData = await webScrapper(doctorData)
+      const validatedData = await webScrapper(doctorData);
 
-      if(validatedData === false || validatedData === undefined || validatedData === null) {
-        throw new Error('Erro interno no servidor!')
-      } 
+      if (
+        validatedData === false ||
+        validatedData === undefined ||
+        validatedData === null
+      ) {
+        throw new Error("Erro interno no servidor!");
+      }
 
-      console.log('Informações medicas validadas')
-      console.log(validatedData)
+      console.log("Informações medicas validadas");
+      console.log(validatedData);
+
+      // verificar se o usuario já esta cadastrado
+      
+      const [userWithSameCPF, userWithSameEmail] = await Promise.all([
+        prisma.user.findUnique({
+          where: {
+            cpf: data.cpf,
+          },
+        }),
+
+        prisma.user.findUnique({
+          where: {
+            email: data.email,
+          },
+        }),
+      ]);
+
+      if (userWithSameCPF !== null) {
+        throw new Error("Um usuário com este CPF já está cadastrado!");
+      }
+
+      if (userWithSameEmail !== null) {
+        throw new Error("Um usuário com este email já está cadastrado!");
+      }
+
+      //cadatrar o usuario no banco de dados
+
 
       return reply.status(201).send("dados recebidos");
     }
