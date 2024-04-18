@@ -2,10 +2,10 @@ POST http://localhost:3333/register
 Content-Type: application/json
 
 {
-  "name": "Fulano da Silva",
-  "email": "fulano@email.com",
+  "name": "Segundo Fulano da silva",
+  "email": "fulano2@email.com",
   "password": "SenhaSegura123",
-  "cpf": "12345678900",
+  "cpf": "12345678901",
   "rg": "599.559-9",
   "gender": "M",
   "phoneNumber": "12345678900",

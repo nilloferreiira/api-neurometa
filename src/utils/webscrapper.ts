@@ -92,8 +92,8 @@ async function fillData(page: Promise<Page>, doctorData: DoctorData) {
 }
 
 export async function webScrapper(doctarData: DoctorData) {
-try {                                   // 
-    const browser = await puppeteer.launch({ headless: false });
+try {                                   // { headless: false }
+    const browser = await puppeteer.launch();
     const page = browser.newPage();
     const URL = "https://portal.cfm.org.br/busca-medicos/";
 

@@ -12,7 +12,7 @@ app.setSerializerCompiler(serializerCompiler)
 
 app.register(RegisterUser)
 
-app.setErrorHandler(errorHandler)
+// app.setErrorHandler(errorHandler)
 
 app.get('/', async () => {
     return 'Hello'

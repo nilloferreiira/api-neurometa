@@ -14,7 +14,7 @@ model User {
   id          String   @id @default(uuid())
   name        String
   email       String   @unique
-  password    String   @unique
+  password    String
   cpf         String   @unique
   rg          String
   gender      String
@@ -23,4 +23,11 @@ model User {
   approved    Boolean  @default(false)
 
   @@map("users")
+}
+
+model Doctor {
+  crm  Int    @id
+  name String
+
+  @@map("doctors")
 }

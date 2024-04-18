@@ -51,21 +51,35 @@ export async function RegisterUser(app: FastifyInstance) {
         uf: data.uf,
       };
 
-      const validatedData = await webScrapper(doctorData);
-      // criar um tipo para validatedData e fazer o if com esse tipo, assim garantido a verificacao
-      if (
-        validatedData === false ||
-        validatedData === undefined ||
-        validatedData === null
-      ) {
-        throw new BadRequest("Erro ao consumir os dados do site do CFM! Por favor tente novamente em alguns instantes");
+      
+      // verifica se o CRM já esta cadastrado!
+      const doctorAlreadyRegistered = await prisma.doctor.findUnique({
+        where: {
+          crm: doctorData.crm
+        }
+      })
+
+      if(doctorAlreadyRegistered === null) {
+        const validatedData = await webScrapper(doctorData);
+        if (
+          validatedData === false ||
+          validatedData === undefined ||
+          validatedData === null
+        ) {
+          throw new Error("Erro ao consumir os dados do site do CFM! Por favor tente novamente em alguns instantes");
+        }
+  
+        console.log("Informações medicas validadas");
+
+        await prisma.doctor.create({
+          data: {
+            crm: doctorData.crm,
+            name: doctorData.name,
+          }
+        })
       }
 
-      console.log("Informações medicas validadas");
-      console.log(validatedData);
-
       // verificar se o usuario já esta cadastrado
-
       const [userWithSameCPF, userWithSameEmail] = await Promise.all([
         prisma.user.findUnique({
           where: {
@@ -81,11 +95,11 @@ export async function RegisterUser(app: FastifyInstance) {
       ]);
 
       if (userWithSameCPF !== null) {
-        throw new BadRequest("Um usuário com este CPF já está cadastrado!");
+        throw new Error("Um usuário com este CPF já está cadastrado!");
       }
 
       if (userWithSameEmail !== null) {
-        throw new BadRequest("Um usuário com este email já está cadastrado!");
+        throw new Error("Um usuário com este email já está cadastrado!");
       }
 
       //cadatrar o usuario no banco de dados
