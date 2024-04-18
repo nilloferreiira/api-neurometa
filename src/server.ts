@@ -1,7 +1,7 @@
 import fastify from "fastify";
+import { errorHandler } from "./error-handler";
 import { RegisterUser } from "./routes/register-user";
 import { serializerCompiler, validatorCompiler } from 'fastify-type-provider-zod';
-import { errorHandler } from "./error-handler";
 
 
 const app = fastify();

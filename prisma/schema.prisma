@@ -20,6 +20,7 @@ model User {
   gender      String
   phoneNumber String   @map("phone_number")
   birthDate   DateTime @map("birth_date")
+  approved    Boolean  @default(false)
 
   @@map("users")
 }
