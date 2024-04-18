@@ -17,6 +17,7 @@
   "dependencies": {
     "fastify": "^4.26.2",
     "fastify-type-provider-zod": "^1.1.9",
+    "puppeteer": "^22.6.5",
     "zod": "^3.22.4"
   }
 }

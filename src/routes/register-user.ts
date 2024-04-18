@@ -1,6 +1,7 @@
 import { z } from "zod";
 import { FastifyInstance } from "fastify";
 import { ZodTypeProvider } from "fastify-type-provider-zod";
+import { webScrapper } from "../utils/webscrapper";
 
 export async function RegisterUser(app: FastifyInstance) {
   app.withTypeProvider<ZodTypeProvider>().post(
@@ -19,7 +20,6 @@ export async function RegisterUser(app: FastifyInstance) {
           // doctor info
           doctorName: z.string(),
           uf: z.string().length(2).toUpperCase(),
-          //   crm: z.coerce.number().min(7),
           crm: z
             .string()
             .max(7)
@@ -49,9 +49,14 @@ export async function RegisterUser(app: FastifyInstance) {
         uf: data.uf,
       };
 
-      // const validatedData = getCFMData(doctorData)
+      const validatedData = await webScrapper(doctorData)
 
-      console.log(data);
+      if(validatedData === false || validatedData === undefined || validatedData === null) {
+        throw new Error('Erro interno no servidor!')
+      } 
+
+      console.log('Informações medicas validadas')
+      console.log(validatedData)
 
       return reply.status(201).send("dados recebidos");
     }

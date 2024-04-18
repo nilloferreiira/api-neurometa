@@ -10,10 +10,33 @@ Content-Type: application/json
   "gender": "M",
   "phoneNumber": "12345678900",
   "birthDate": "1980-01-01",
-  "doctorName": "Dra. Maria Oliveira",
-  "uf": "RJ",
-  "crm": "1234567",
+  "doctorName": "Veida Borges Soares de Queiroz",
+  "uf": "SE",
+  "crm": "7286",
   "especialidade": "Dermatologia",
   "diagnostico": "Dermatite Atópica",
   "cid": "L20.9"
 }
+
+# {
+#   "name": "Fulano da Silva",
+#   "email": "fulano@email.com",
+#   "password": "SenhaSegura123",
+#   "cpf": "12345678900",
+#   "rg": "599.559-9",
+#   "gender": "M",
+#   "phoneNumber": "12345678900",
+#   "birthDate": "1980-01-01",
+#   "doctorName": "Dra. Maria Oliveira",
+#   "uf": "RJ",
+#   "crm": "1234567",
+#   "especialidade": "Dermatologia",
+#   "diagnostico": "Dermatite Atópica",
+#   "cid": "L20.9"
+# }
+
+# const doctarData: DoctorData = {
+#   name: "Veida Borges Soares de Queiroz",
+#   crm: 7286,
+#   uf: "SE",
+# };
