@@ -23,7 +23,7 @@ export function sendEmail(userid: string) {
 
   transporter
     .sendMail({
-      from: "Administrador <arcanumchronicles2@gmail.com>",
+      from: "API de cadastro dos usuários da neurometa <arcanumchronicles2@gmail.com>",
       to: "nilloferreiira@gmail.com",
       subject: "Approve user register",
       html: html,
@@ -31,5 +31,3 @@ export function sendEmail(userid: string) {
     .then(() => console.log("Email enviado."))
     .catch(() => console.log("Ocorreu algum erro e o email não foi enviado."));
 }
-
-sendEmail('5301a6d2-e6cd-4f31-82f7-649243992438')

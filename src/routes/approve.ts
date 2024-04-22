@@ -11,7 +11,12 @@ export async function Approve(app: FastifyInstance) {
             schema: {
                 params: z.object({
                     userId: z.string().uuid(),
-                })
+                }),
+                response: {
+                    201: z.object({
+                        message: z.string(),
+                    })
+                } 
             }
         }, 
         async (request, reply) => {
@@ -36,6 +41,6 @@ export async function Approve(app: FastifyInstance) {
                 }
             })
 
-            reply.status(204).send()
+            return reply.status(204).send({ message: 'Usuário aprovado com sucesso!' })
         });
 }

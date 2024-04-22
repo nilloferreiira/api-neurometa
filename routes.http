@@ -2,11 +2,11 @@ POST http://localhost:3333/register
 Content-Type: application/json
 
 {
-  "name": "Segundo Fulano da silva",
-  "email": "fulano2@email.com",
+  "name": "Usuario para teste do email",
+  "email": "email2@email.com",
   "password": "SenhaSegura123",
-  "cpf": "12345678901",
-  "rg": "599.559-9",
+  "cpf": "12345678903",
+  "rg": "599.559-1",
   "gender": "M",
   "phoneNumber": "12345678900",
   "birthDate": "1980-01-01",
@@ -20,7 +20,7 @@ Content-Type: application/json
 
 ###
 
-GET http://localhost:3333/approve/05243cb3-ff78-4547-a6c1-f851753fb3e7
+GET http://localhost:3333/approve/9a22f90b-47d8-4b06-912e-8057c2a5e16c
 
 # const doctarData: DoctorData = {
 #   name: "Veida Borges Soares de Queiroz",

@@ -4,6 +4,7 @@ import { FastifyInstance } from "fastify";
 import { webScrapper } from "../utils/webscrapper";
 import { ZodTypeProvider } from "fastify-type-provider-zod";
 import { BadRequest } from "./_errors/bad-request";
+import { sendEmail } from "../utils/send-email";
 
 export async function RegisterUser(app: FastifyInstance) {
   app.withTypeProvider<ZodTypeProvider>().post(
@@ -116,7 +117,10 @@ export async function RegisterUser(app: FastifyInstance) {
         }
       })
 
-      return reply.status(201).send({ userId: user.id});
+      // tirar daq e colocar na rota certa
+      sendEmail(user.id)
+
+      return reply.status(201).send({ userId: user.id });
     }
   );
 }
