@@ -1,7 +1,7 @@
 import { z } from "zod";
+import { sendEmail } from "./send-email";
 import { FastifyInstance } from "fastify";
 import { ZodTypeProvider } from "fastify-type-provider-zod";
-import { sendEmail } from "./send-email";
 
 export async function uploads(app: FastifyInstance) {
   app.withTypeProvider<ZodTypeProvider>().post(

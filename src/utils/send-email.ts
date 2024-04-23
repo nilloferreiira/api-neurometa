@@ -1,12 +1,13 @@
 import nodemailer from "nodemailer";
+import 'dotenv/config'
 
 export function sendEmail(userid: string, pdfFileName: string, pdfBuffer: any) {
   const transporter = nodemailer.createTransport({
-    host: "smtp.gmail.com",
-    port: 587,
+    host: process.env.host,
+    port: Number(process.env.port),
     auth: {
-      user: "arcanumchronicles2@gmail.com",
-      pass: "omne ydru gfcs aynk",
+      user: process.env.user,
+      pass: process.env.pass,
     },
   });
 
@@ -24,7 +25,7 @@ export function sendEmail(userid: string, pdfFileName: string, pdfBuffer: any) {
   transporter
     .sendMail({
       from: "API de cadastro dos usuários da neurometa <arcanumchronicles2@gmail.com>",
-      to: "nilloferreiira@gmail.com",
+      to: process.env.emailTo,
       subject: "Approve user register",
       html: html,
       attachments: [
