@@ -116,10 +116,7 @@ export async function RegisterUser(app: FastifyInstance) {
           phoneNumber: data.phoneNumber,
         }
       })
-
-      // tirar daq e colocar na rota certa
-      sendEmail(user.id)
-
+      
       return reply.status(201).send({ userId: user.id });
     }
   );

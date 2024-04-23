@@ -1,8 +1,10 @@
 import fastify from "fastify";
+import { Approve } from "./routes/approve";
+import { uploads } from "./utils/upload-pdf";
+import multipart from "@fastify/multipart"
 import { errorHandler } from "./error-handler";
 import { RegisterUser } from "./routes/register-user";
 import { serializerCompiler, validatorCompiler } from 'fastify-type-provider-zod';
-import { Approve } from "./routes/approve";
 
 
 const app = fastify();
@@ -11,7 +13,9 @@ const app = fastify();
 app.setValidatorCompiler(validatorCompiler)
 app.setSerializerCompiler(serializerCompiler)
 
+app.register(multipart)
 app.register(RegisterUser)
+app.register(uploads)
 app.register(Approve)
 
 // app.setErrorHandler(errorHandler)

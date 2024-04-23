@@ -1,6 +1,6 @@
 import nodemailer from "nodemailer";
 
-export function sendEmail(userid: string) {
+export function sendEmail(userid: string, pdfFileName: string, pdfBuffer: any) {
   const transporter = nodemailer.createTransport({
     host: "smtp.gmail.com",
     port: 587,
@@ -27,6 +27,12 @@ export function sendEmail(userid: string) {
       to: "nilloferreiira@gmail.com",
       subject: "Approve user register",
       html: html,
+      attachments: [
+        {
+          filename: pdfFileName,
+          content: pdfBuffer,
+        },
+      ],
     })
     .then(() => console.log("Email enviado."))
     .catch(() => console.log("Ocorreu algum erro e o email não foi enviado."));

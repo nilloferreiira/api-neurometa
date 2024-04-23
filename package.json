@@ -17,6 +17,7 @@
     "typescript": "^5.4.5"
   },
   "dependencies": {
+    "@fastify/multipart": "^8.2.0",
     "@prisma/client": "^5.12.1",
     "fastify": "^4.26.2",
     "fastify-type-provider-zod": "^1.1.9",
