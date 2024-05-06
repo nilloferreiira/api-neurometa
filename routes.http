@@ -3,10 +3,10 @@ Content-Type: application/json
 
 {
   "name": "Usuario para teste do email",
-  "email": "email2@email.com",
+  "email": "emailteste@email.com",
   "password": "SenhaSegura123",
-  "cpf": "12345678903",
-  "rg": "599.559-1",
+  "cpf": "12345678904",
+  "rg": "599.559-2",
   "gender": "M",
   "phoneNumber": "12345678900",
   "birthDate": "1980-01-01",

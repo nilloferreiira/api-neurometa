@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { sendEmail } from "./send-email";
+import { sendEmail } from "../utils/send-email";
 import { FastifyInstance } from "fastify";
 import { ZodTypeProvider } from "fastify-type-provider-zod";
 

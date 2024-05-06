@@ -1,10 +1,9 @@
-import { z } from "zod";
-import { prisma } from "../lib/prisma";
-import { FastifyInstance } from "fastify";
-import { webScrapper } from "../utils/webscrapper";
 import { ZodTypeProvider } from "fastify-type-provider-zod";
+import { webScrapper } from "../utils/webscrapper";
 import { BadRequest } from "./_errors/bad-request";
-import { sendEmail } from "../utils/send-email";
+import { FastifyInstance } from "fastify";
+import { prisma } from "../lib/prisma";
+import { z } from "zod";
 
 export async function RegisterUser(app: FastifyInstance) {
   app.withTypeProvider<ZodTypeProvider>().post(
@@ -67,7 +66,7 @@ export async function RegisterUser(app: FastifyInstance) {
           validatedData === undefined ||
           validatedData === null
         ) {
-          throw new Error("Erro ao consumir os dados do site do CFM! Por favor tente novamente em alguns instantes");
+          throw new BadRequest("Erro ao consumir os dados do site do CFM! Por favor tente novamente em alguns instantes");
         }
   
         console.log("Informações medicas validadas");
@@ -96,11 +95,11 @@ export async function RegisterUser(app: FastifyInstance) {
       ]);
 
       if (userWithSameCPF !== null) {
-        throw new Error("Um usuário com este CPF já está cadastrado!");
+        throw new BadRequest("Um usuário com este CPF já está cadastrado!");
       }
 
       if (userWithSameEmail !== null) {
-        throw new Error("Um usuário com este email já está cadastrado!");
+        throw new BadRequest("Um usuário com este email já está cadastrado!");
       }
 
       //cadatrar o usuario no banco de dados

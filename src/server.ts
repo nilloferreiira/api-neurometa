@@ -1,6 +1,6 @@
 import fastify from "fastify";
 import { Approve } from "./routes/approve";
-import { uploads } from "./utils/upload-pdf";
+import { uploads } from "./routes/upload-pdf";
 import multipart from "@fastify/multipart"
 import { errorHandler } from "./error-handler";
 import { RegisterUser } from "./routes/register-user";
