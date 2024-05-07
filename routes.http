@@ -8,7 +8,7 @@ Content-Type: application/json
   "cpf": "12345678904",
   "rg": "599.559-2",
   "gender": "M",
-  "phoneNumber": "12345678900",
+  "phoneNumber": "92345678900",
   "birthDate": "1980-01-01",
   "doctorName": "Veida Borges Soares de Queiroz",
   "uf": "SE",
