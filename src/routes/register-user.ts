@@ -36,7 +36,7 @@ export async function RegisterUser(app: FastifyInstance) {
         }),
         response: {
           201: z.object({
-            userId: z.string().uuid()
+            token: z.string(),
           }),
         },
       },
@@ -51,32 +51,33 @@ export async function RegisterUser(app: FastifyInstance) {
         uf: data.uf,
       };
 
-      
       // verifica se o CRM já esta cadastrado!
       const doctorAlreadyRegistered = await prisma.doctor.findUnique({
         where: {
-          crm: doctorData.crm
-        }
-      })
+          crm: doctorData.crm,
+        },
+      });
 
-      if(doctorAlreadyRegistered === null) {
+      if (doctorAlreadyRegistered === null) {
         const validatedData = await webScrapper(doctorData);
         if (
           validatedData === false ||
           validatedData === undefined ||
           validatedData === null
         ) {
-          throw new BadRequest("Erro ao consumir os dados do site do CFM! Por favor tente novamente em alguns instantes");
+          throw new BadRequest(
+            "Erro ao consumir os dados do site do CFM! Por favor tente novamente em alguns instantes"
+          );
         }
-  
+
         console.log("Informações medicas validadas");
 
         await prisma.doctor.create({
           data: {
             crm: doctorData.crm,
             name: doctorData.name,
-          }
-        })
+          },
+        });
       }
 
       // verificar se o usuario já esta cadastrado
@@ -113,10 +114,20 @@ export async function RegisterUser(app: FastifyInstance) {
           password: data.password,
           birthDate: data.birthDate,
           phoneNumber: data.phoneNumber,
+        },
+      });
+
+      const token = app.jwt.sign(
+        {
+          name: user.name,
+        },
+        {
+          sub: user.id,
+          expiresIn: "30 days",
         }
-      })
-      
-      return reply.status(201).send({ userId: user.id });
+      );
+
+      return reply.status(201).send({ token });
     }
   );
 }

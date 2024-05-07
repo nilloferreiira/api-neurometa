@@ -2,10 +2,10 @@ POST http://localhost:3333/register
 Content-Type: application/json
 
 {
-  "name": "Usuario para teste do email",
-  "email": "emailteste@email.com",
+  "name": "Usuario jwt",
+  "email": "emailteste55@email.com",
   "password": "SenhaSegura123",
-  "cpf": "12345678904",
+  "cpf": "99345678904",
   "rg": "599.559-2",
   "gender": "M",
   "phoneNumber": "92345678900",

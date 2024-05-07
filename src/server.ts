@@ -1,5 +1,6 @@
 import fastify from "fastify";
-import fastifyCors from '@fastify/cors'
+import jwt from "@fastify/jwt";
+import cors from '@fastify/cors'
 import multipart from "@fastify/multipart"
 import { Approve } from "./routes/approve";
 import { uploads } from "./routes/upload-pdf";
@@ -12,8 +13,13 @@ const app = fastify();
 app.setValidatorCompiler(validatorCompiler)
 app.setSerializerCompiler(serializerCompiler)
 
-app.register(fastifyCors, {
+app.register(cors, {
     origin: true
+})
+
+
+app.register(jwt, {
+    secret: 'neurometa_secret'
 })
 
 app.register(multipart)
