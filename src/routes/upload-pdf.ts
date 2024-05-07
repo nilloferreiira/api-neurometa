@@ -14,6 +14,8 @@ export async function uploads(app: FastifyInstance) {
       },
     },
     async (request, reply) => {
+      await request.jwtVerify()
+
       const upload = await request.file({
         limits: {
           fileSize: 5242880
