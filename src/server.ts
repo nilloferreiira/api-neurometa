@@ -6,6 +6,7 @@ import { Approve } from "./routes/approve";
 import { uploads } from "./routes/upload-pdf";
 import { errorHandler } from "./error-handler";
 import { RegisterUser } from "./routes/register-user";
+import { Login } from "./routes/login";
 import { serializerCompiler, validatorCompiler } from 'fastify-type-provider-zod';
 
 const app = fastify();
@@ -24,6 +25,7 @@ app.register(jwt, {
 
 app.register(multipart)
 app.register(RegisterUser)
+app.register(Login)
 app.register(uploads)
 app.register(Approve)
 

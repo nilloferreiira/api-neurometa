@@ -40,6 +40,8 @@ export async function uploads(app: FastifyInstance) {
 
       const { userId } = request.params;
       
+      // verificar se o ID esta cadastrado
+
       sendEmail(userId, pdfFileName, pdfBuffer)
       
       return reply.send("Email sended");
