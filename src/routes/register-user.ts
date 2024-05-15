@@ -120,6 +120,7 @@ export async function RegisterUser(app: FastifyInstance) {
       const token = app.jwt.sign(
         {
           name: user.name,
+          approved: user.approved
         },
         {
           sub: user.id,
