@@ -4,14 +4,12 @@ import 'dotenv/config'
 export function sendEmail(userid: string, pdfFileName: string, pdfBuffer: any) {
   const transporter = nodemailer.createTransport({
     host: process.env.host,
-    port: Number(process.env.port),
+    port: Number(process.env.mail_port),
     auth: {
       user: process.env.user,
       pass: process.env.pass,
     },
   });
-
-  // const html = `<div><h1>Por favor verifique se este documento é verídico.</h1><br/><img src=""><br/><p>Caso seja esteja tudo certo, clique no link abaixo para aprovar o cadastro do usuário</p><br/><a href="">Aprovar</a></div>`
 
   const html = `<div>
                     <h1>Por favor verifique se este documento é verídico.</h1>
