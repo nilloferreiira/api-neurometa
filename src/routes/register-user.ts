@@ -114,6 +114,8 @@ export async function RegisterUser(app: FastifyInstance) {
           password: data.password,
           birthDate: data.birthDate,
           phoneNumber: data.phoneNumber,
+          cid: data.cid,
+          diagnostico: data.diagnostico
         },
       });
 

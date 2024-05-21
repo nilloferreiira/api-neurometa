@@ -19,6 +19,8 @@ model User {
   cpf         String   @unique
   rg          String
   gender      String
+  diagnostico String
+  cid         String
   phoneNumber String   @map("phone_number")
   birthDate   DateTime @map("birth_date")
   approved    Boolean  @default(false)

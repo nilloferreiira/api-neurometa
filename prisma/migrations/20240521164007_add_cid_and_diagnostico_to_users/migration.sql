@@ -7,6 +7,8 @@ CREATE TABLE "users" (
     "cpf" TEXT NOT NULL,
     "rg" TEXT NOT NULL,
     "gender" TEXT NOT NULL,
+    "diagnostico" TEXT NOT NULL,
+    "cid" TEXT NOT NULL,
     "phone_number" TEXT NOT NULL,
     "birth_date" TIMESTAMP(3) NOT NULL,
     "approved" BOOLEAN NOT NULL DEFAULT false,
