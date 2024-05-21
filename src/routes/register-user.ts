@@ -4,6 +4,9 @@ import { BadRequest } from "./_errors/bad-request";
 import { FastifyInstance } from "fastify";
 import { prisma } from "../lib/prisma";
 import { z } from "zod";
+// import { createPDF } from "../utils/create-pdf";
+import { sendEmail } from "../utils/send-email";
+import { generatePDFBuffer } from "../utils/create-pdf";
 
 export async function RegisterUser(app: FastifyInstance) {
   app.withTypeProvider<ZodTypeProvider>().post(
@@ -14,8 +17,15 @@ export async function RegisterUser(app: FastifyInstance) {
           name: z.string(),
           email: z.string().email(),
           password: z.string(),
-          cpf: z.string().length(11),
-          rg: z.string().min(8).max(11),
+          cpf: z
+            .string()
+            .regex(
+              /^\d{3}\.\d{3}\.\d{3}-\d{2}$/,
+              "Por facor, use um CPF válido!"
+            ),
+          rg: z
+            .string()
+            .regex(/^\d{3}\.\d{3}-\d$/, "Por facor, use um RG válido!"),
           gender: z.string().length(1),
           phoneNumber: z.string().length(11),
           birthDate: z.string().transform((value) => new Date(value)), // alterar o tipo
@@ -36,7 +46,7 @@ export async function RegisterUser(app: FastifyInstance) {
         }),
         response: {
           201: z.object({
-            token: z.string(),
+            201: z.string(),
           }),
         },
       },
@@ -111,26 +121,47 @@ export async function RegisterUser(app: FastifyInstance) {
           rg: data.rg,
           email: data.email,
           gender: data.gender,
+          uf: data.uf,
           password: data.password,
           birthDate: data.birthDate,
           phoneNumber: data.phoneNumber,
           cid: data.cid,
-          diagnostico: data.diagnostico
+          diagnostico: data.diagnostico,
+          doctorCrm: data.crm,
+          doctorName: data.doctorName,
         },
       });
 
-      const token = app.jwt.sign(
-        {
-          name: user.name,
-          approved: user.approved
-        },
-        {
-          sub: user.id,
-          expiresIn: "30 days",
-        }
-      );
+      // criar o pdf
+      const fileName = `cadastro_${user.name}.pdf`
+      generatePDFBuffer(user)
+      .then((pdfBuffer) => {
+        sendEmail(user.id, fileName, pdfBuffer);
+        console.log('PDF gerado com sucesso.');
+      })
+      .catch((error) => {
+        console.error('Ocorreu um erro ao gerar o PDF:', error);
+      });
 
-      return reply.status(201).send({ token });
+
+      
+
+
+      //daq pra baixo muda apenas para um "Usuario cadastrado"
+      // const token = app.jwt.sign(
+      //   {
+      //     name: user.name,
+      //     approved: user.approved
+      //   },
+      //   {
+      //     sub: user.id,
+      //     expiresIn: "30 days",
+      //   }
+      // );
+
+      return reply
+        .status(201)
+        .send({ 201: "Usuário pré cadastrado com sucesso!" });
     }
   );
 }

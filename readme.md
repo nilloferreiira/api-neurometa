@@ -11,6 +11,7 @@ A API Neurometa foi desenvolvida para cadastrar usu√°rios e verificar se eles t√
 - Zod
 - Fastify Type Provider Zod
 - Prisma
+- Pdfkit
 - Puppeteer
 - Nodemailer
 

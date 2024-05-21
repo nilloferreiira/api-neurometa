@@ -19,10 +19,13 @@ model User {
   cpf         String   @unique
   rg          String
   gender      String
+  uf          String
   diagnostico String
   cid         String
   phoneNumber String   @map("phone_number")
   birthDate   DateTime @map("birth_date")
+  doctorCrm   Int
+  doctorName  String
   approved    Boolean  @default(false)
 
   @@map("users")
