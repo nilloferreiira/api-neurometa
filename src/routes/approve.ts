@@ -52,7 +52,7 @@ export async function Approve(app: FastifyInstance) {
                         agreeTerms: true,
                         enderecoCompleto: "endereço completo",
                         role: "Paciente",
-                        fotoPerfil: "Zm90b3JndmVyc28=",
+                        fotoPerfil: null,
                         telefone: user.phoneNumber,
                         cpf: user.cpf,
                         rg: user.rg
