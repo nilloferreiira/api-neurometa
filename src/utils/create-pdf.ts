@@ -17,7 +17,8 @@ interface UserData {
 }
 
 export async function generatePDFBuffer(data: UserData): Promise<Buffer> {
-  const browser = await puppeteer.launch();
+  const chromium = require('chromium');
+  const browser = await puppeteer.launch({ executablePath: chromium.path, headless: true, args: ['--no-sandbox', '--disable-setuid-sandbox'] });
   const page = await browser.newPage();
 
   // Crie o conteúdo HTML personalizado

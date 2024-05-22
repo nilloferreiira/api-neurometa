@@ -92,8 +92,9 @@ async function fillData(page: Promise<Page>, doctorData: DoctorData) {
 }
 
 export async function webScrapper(doctarData: DoctorData) {
-try {                                   // { headless: false }
-    const browser = await puppeteer.launch();
+try {                                   
+    const chromium = require('chromium');
+    const browser = await puppeteer.launch({ executablePath: chromium.path, headless: true, args: ['--no-sandbox', '--disable-setuid-sandbox'] });
     const page = browser.newPage();
     const URL = "https://portal.cfm.org.br/busca-medicos/";
 
