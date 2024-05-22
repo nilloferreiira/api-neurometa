@@ -4,7 +4,6 @@ import { BadRequest } from "./_errors/bad-request";
 import { FastifyInstance } from "fastify";
 import { prisma } from "../lib/prisma";
 import { z } from "zod";
-// import { createPDF } from "../utils/create-pdf";
 import { sendEmail } from "../utils/send-email";
 import { generatePDFBuffer } from "../utils/create-pdf";
 
@@ -133,31 +132,15 @@ export async function RegisterUser(app: FastifyInstance) {
       });
 
       // criar o pdf
-      const fileName = `cadastro_${user.name}.pdf`
+      const fileName = `cadastro_${user.name}.pdf`;
       generatePDFBuffer(user)
-      .then((pdfBuffer) => {
-        sendEmail(user.id, fileName, pdfBuffer);
-        console.log('PDF gerado com sucesso.');
-      })
-      .catch((error) => {
-        console.error('Ocorreu um erro ao gerar o PDF:', error);
-      });
-
-
-      
-
-
-      //daq pra baixo muda apenas para um "Usuario cadastrado"
-      // const token = app.jwt.sign(
-      //   {
-      //     name: user.name,
-      //     approved: user.approved
-      //   },
-      //   {
-      //     sub: user.id,
-      //     expiresIn: "30 days",
-      //   }
-      // );
+        .then((pdfBuffer) => {
+          sendEmail(user.id, fileName, pdfBuffer);
+          console.log("PDF gerado com sucesso.");
+        })
+        .catch((error) => {
+          console.error("Ocorreu um erro ao gerar o PDF:", error);
+        });
 
       return reply
         .status(201)
