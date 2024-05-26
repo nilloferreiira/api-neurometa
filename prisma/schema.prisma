@@ -12,21 +12,22 @@ datasource db {
 }
 
 model User {
-  id          String   @id @default(uuid())
-  name        String
-  email       String   @unique
-  password    String
-  cpf         String   @unique
-  rg          String
-  gender      String
-  uf          String
-  diagnostico String
-  cid         String
-  phoneNumber String   @map("phone_number")
-  birthDate   DateTime @map("birth_date")
-  doctorCrm   Int
-  doctorName  String
-  approved    Boolean  @default(false)
+  id            String   @id @default(uuid())
+  name          String
+  email         String   @unique
+  password      String
+  cpf           String   @unique
+  rg            String
+  gender        String
+  uf            String
+  diagnostico   String
+  cid           String
+  phoneNumber   String   @map("phone_number")
+  birthDate     DateTime @map("birth_date")
+  doctorCrm     Int
+  doctorName    String
+  medicalReport String?
+  approved      Boolean  @default(false)
 
   @@map("users")
 }

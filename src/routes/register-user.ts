@@ -42,10 +42,11 @@ export async function RegisterUser(app: FastifyInstance) {
               const parsedCrm = parseInt(value);
               return parsedCrm;
             }),
-          especialidade: z.string().max(25).optional(),
-          areaAtuacao: z.string().max(50).optional(),
+          especialidade: z.string().max(25).optional().nullable(),
+          areaAtuacao: z.string().max(50).optional().nullable(),
           diagnostico: z.string().min(3).max(255),
           cid: z.string().max(12),
+          medicalReport: z.string(),
         }),
         response: {
           201: z.object({
@@ -132,6 +133,7 @@ export async function RegisterUser(app: FastifyInstance) {
           diagnostico: data.diagnostico,
           doctorCrm: data.crm,
           doctorName: data.doctorName,
+          medicalReport: data.medicalReport,
         },
       });
 
@@ -139,7 +141,13 @@ export async function RegisterUser(app: FastifyInstance) {
       const fileName = `cadastro_${user.name}.pdf`;
       generatePDFBuffer(user)
         .then((pdfBuffer) => {
-          sendEmail(user.id, fileName, pdfBuffer);
+          sendEmail({
+            userId: user.id,
+            userEmail: null,
+            pdfFileName: fileName,
+            pdfBuffer: pdfBuffer,
+            medicalReportInBase64: user.medicalReport!,
+          });
           console.log("PDF gerado com sucesso.");
         })
         .catch((error) => {
