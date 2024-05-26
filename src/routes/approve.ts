@@ -3,6 +3,7 @@ import { FastifyInstance } from "fastify";
 import { ZodTypeProvider } from "fastify-type-provider-zod";
 import { prisma } from '../lib/prisma';
 import axios from 'axios';
+import { sendEmail } from '../utils/send-email';
 
 export async function Approve(app: FastifyInstance) {
   app
@@ -43,6 +44,8 @@ export async function Approve(app: FastifyInstance) {
             })
 
             try {
+                const medicalReport = user.medicalReport === null ? "Zm90b3JndmVyc28=" : user.medicalReport
+
                 const backendResponse = await axios.post("https://neurometaoncoapi.azurewebsites.net/RegisterUser", {
                     registerUser: {
                         email: user.email,
@@ -61,7 +64,7 @@ export async function Approve(app: FastifyInstance) {
                         fotoRgFrente: "Zm90b3JndmVyc28=",
                         fotoRgVerso: "Zm90b3JndmVyc28=",
                         comprovanteResidencia: "Zm90b3JndmVyc28=",
-                        relatorioMedico: "Zm90b3JndmVyc28=",
+                        relatorioMedico: medicalReport,
                         pdfFormatado: "Zm90b3JndmVyc28=",
                         crmMedico: user.doctorCrm,
                         nomeMedico: user.doctorName,
@@ -73,6 +76,8 @@ export async function Approve(app: FastifyInstance) {
                 if(!backendResponse) {
                     throw new Error("Erro ao cadastrar o usuário no banco de dados do sistema.")
                 }
+
+                sendEmail({userId: user.id, userEmail: user.email, pdfFileName: null, pdfBuffer: null, medicalReportInBase64: null })
             } catch(e) {
                 console.log(e)
                 throw new Error("Erro interno do servidor.")
