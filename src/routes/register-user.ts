@@ -46,7 +46,7 @@ export async function RegisterUser(app: FastifyInstance) {
           areaAtuacao: z.string().max(50).optional().nullable(),
           diagnostico: z.string().min(3).max(255),
           cid: z.string().max(12),
-          medicalReport: z.string(),
+          medicalReport: z.string().optional(),
         }),
         response: {
           201: z.object({
@@ -133,7 +133,7 @@ export async function RegisterUser(app: FastifyInstance) {
           diagnostico: data.diagnostico,
           doctorCrm: data.crm,
           doctorName: data.doctorName,
-          medicalReport: data.medicalReport
+          medicalReport: data.medicalReport!
         },
       });
 
