@@ -26,7 +26,7 @@ model User {
   birthDate     DateTime @map("birth_date")
   doctorCrm     Int
   doctorName    String
-  medicalReport String?  @map("medical_report")
+  medicalReport String   @map("medical_report")
   approved      Boolean  @default(false)
 
   @@map("users")

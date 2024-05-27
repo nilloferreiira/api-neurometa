@@ -13,7 +13,7 @@ export async function RegisterUser(app: FastifyInstance) {
     {
       schema: {
         summary: "Validação de cadastro.",
-        description: 
+        description:
           "Valida as informações médicas do usuário e, se passarem, cadastra-o no banco de dados da API. Em seguida, envia os dados do paciente para um administrador da Neurometa, aguardando a aprovação do cadastro.",
         tags: ["validação"],
         body: z.object({
@@ -46,7 +46,7 @@ export async function RegisterUser(app: FastifyInstance) {
           areaAtuacao: z.string().max(50).optional().nullable(),
           diagnostico: z.string().min(3).max(255),
           cid: z.string().max(12),
-          medicalReport: z.string().optional(),
+          medicalReport: z.string(),
         }),
         response: {
           201: z.object({
@@ -118,6 +118,7 @@ export async function RegisterUser(app: FastifyInstance) {
       }
 
       //cadatrar o usuario no banco de dados
+
       const user = await prisma.user.create({
         data: {
           name: data.name,
@@ -133,7 +134,7 @@ export async function RegisterUser(app: FastifyInstance) {
           diagnostico: data.diagnostico,
           doctorCrm: data.crm,
           doctorName: data.doctorName,
-          medicalReport: data.medicalReport!
+          medicalReport: data.medicalReport,
         },
       });
 
