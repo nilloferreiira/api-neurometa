@@ -7,10 +7,14 @@ CREATE TABLE "users" (
     "cpf" TEXT NOT NULL,
     "rg" TEXT NOT NULL,
     "gender" TEXT NOT NULL,
+    "uf" TEXT NOT NULL,
     "diagnostico" TEXT NOT NULL,
     "cid" TEXT NOT NULL,
     "phone_number" TEXT NOT NULL,
     "birth_date" TIMESTAMP(3) NOT NULL,
+    "doctorCrm" INTEGER NOT NULL,
+    "doctorName" TEXT NOT NULL,
+    "medicalReport" TEXT,
     "approved" BOOLEAN NOT NULL DEFAULT false,
 
     CONSTRAINT "users_pkey" PRIMARY KEY ("id")
