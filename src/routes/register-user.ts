@@ -133,7 +133,7 @@ export async function RegisterUser(app: FastifyInstance) {
           diagnostico: data.diagnostico,
           doctorCrm: data.crm,
           doctorName: data.doctorName,
-          medicalReport: data.medicalReport,
+          medicalReport: data.medicalReport
         },
       });
 

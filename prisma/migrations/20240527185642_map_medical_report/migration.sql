@@ -14,7 +14,7 @@ CREATE TABLE "users" (
     "birth_date" TIMESTAMP(3) NOT NULL,
     "doctorCrm" INTEGER NOT NULL,
     "doctorName" TEXT NOT NULL,
-    "medicalReport" TEXT NOT NULL,
+    "medical_report" TEXT NOT NULL,
     "approved" BOOLEAN NOT NULL DEFAULT false,
 
     CONSTRAINT "users_pkey" PRIMARY KEY ("id")
