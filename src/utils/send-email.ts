@@ -44,7 +44,7 @@ export function sendEmail({
                     <img src="">
                     <br/>
                     <p>Caso seja esteja tudo certo, clique no link abaixo para aprovar o cadastro do usuário</p><br/>
-                    <a href="http://localhost:3333/approve/${userId}">Aprovar</a>
+                    <a href="https://api-neurometa.onrender.com/approve/${userId}">Aprovar</a>
                    </div>`;
 
   if (pdfFileName !== null && pdfBuffer !== null) {
