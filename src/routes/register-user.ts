@@ -14,15 +14,8 @@ export async function RegisterUser(app: FastifyInstance) {
       schema: {
         summary: "Validação de cadastro.",
         description:
-          "Valida as informações médicas do usuário e, se passarem, cadastra-o no banco de dados da API. Em seguida, envia os dados do paciente para um administrador da Neurometa, aguardando a aprovação do cadastro.",
+          "Valida as informações médicas do usuário e, se passarem, cadastra-o no banco de dados da API. Em seguida, envia os dados do paciente para um administrador da Neurometa, aguardando a aprovação do cadastro. o medicalReport espera uma imagem em base64",
         tags: ["validação"],
-        properties: {
-          medicalReport: {
-            type: 'string',
-            format: 'byte',
-            description: 'Relatório médico codificado em Base64.'
-          }
-        },
         body: z.object({
           name: z.string(),
           email: z.string().email(),
